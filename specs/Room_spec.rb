@@ -7,11 +7,11 @@ require_relative("../Song.rb")
 class TestRoom < MiniTest::Test
 
   def setup
-    @guest1 = Guest.new("Niall", 50)
-    @guest2 = Guest.new("Colin", 100)
-    @guest3 = Guest.new("Jordan", 80)
-    @guest4 = Guest.new("Kevin", 90)
-    @guest5 = Guest.new("Paul", 60)
+    @guest1 = Guest.new("Niall", "Hotel California", 50)
+    @guest2 = Guest.new("Colin", "We didn't start the fire", 100)
+    @guest3 = Guest.new("Jordan", "Everybody wants to rule the world", 80)
+    @guest4 = Guest.new("Kevin", "Hurricane", 90)
+    @guest5 = Guest.new("Paul", "Bonkers", 60)
 
     @song1 = Song.new("Hotel California")
     @song2 = Song.new("We didn't start the fire")
@@ -81,6 +81,10 @@ class TestRoom < MiniTest::Test
   def test_charge_entry_fee()
     @room1.charge_entry_fee(@guest1)
     assert_equal(45, @guest1.money())
+  end
+
+  def test_guest_fav_song_cheer()
+    assert_equal("wooooo!", @room1.guest_fav_song_cheer(@guest1))
   end
 
 end

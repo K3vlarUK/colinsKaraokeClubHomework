@@ -1,3 +1,5 @@
+require("pry")
+
 class Room
   attr_reader :name, :songs, :capacity, :entry_fee, :customers
 
@@ -35,6 +37,15 @@ class Room
 
   def charge_entry_fee(guest)
     guest.remove_money(@entry_fee)
+  end
+
+  def guest_fav_song_cheer(guest)
+    for song in @songs
+      # binding.pry - forgot .title() on song
+      if song.title() == guest.has_fav_song()
+        return "wooooo!"
+      end
+    end
   end
 
 end
