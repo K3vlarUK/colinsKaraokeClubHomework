@@ -43,6 +43,10 @@ class TestRoom < MiniTest::Test
     assert_equal(0, @room1.customers().length())
   end
 
+  def test_room_has_till_balance()
+    assert_equal(1000, @room1.till_balance())
+  end
+
   def test_add_guest_to_room()
     @room1.add_guest(@guest1)
     assert_equal(1, @room1.customers().length())
@@ -85,6 +89,16 @@ class TestRoom < MiniTest::Test
 
   def test_guest_fav_song_cheer()
     assert_equal("wooooo!", @room1.guest_fav_song_cheer(@guest1))
+  end
+
+  def test_add_entry_money_to_till()
+    assert_equal(1005, @room1.add_entry_money_to_til())
+  end
+
+  def test_guest_adds_money_to_til_on_entry()
+    @room1.add_guest(@guest1)
+    @room1.add_guest(@guest2)
+    assert_equal(1010, @room1.till_balance())
   end
 
 end

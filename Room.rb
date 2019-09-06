@@ -1,7 +1,7 @@
 require("pry")
 
 class Room
-  attr_reader :name, :songs, :capacity, :entry_fee, :customers
+  attr_reader :name, :songs, :capacity, :entry_fee, :customers, :till_balance
 
   def initialize(name, songs, capacity, entry_fee)
     @name = name
@@ -9,11 +9,13 @@ class Room
     @capacity = capacity
     @entry_fee = entry_fee
     @customers = []
+    @till_balance = 1000
   end
 
   def add_guest(guest)
     if !at_capacity?()
       @customers.push(guest)
+      add_entry_money_to_til()
     else
       return "Sorry, Full"
     end
@@ -46,6 +48,10 @@ class Room
         return "wooooo!"
       end
     end
+  end
+
+  def add_entry_money_to_til()
+    @till_balance += @entry_fee
   end
 
 end
