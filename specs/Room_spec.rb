@@ -3,6 +3,8 @@ require("minitest/pride")
 require_relative("../Room.rb")
 require_relative("../Guest.rb")
 require_relative("../Song.rb")
+require_relative("../Drink.rb")
+require_relative("../Bar.rb")
 
 class TestRoom < MiniTest::Test
 
@@ -21,6 +23,13 @@ class TestRoom < MiniTest::Test
     @songs = [@song1, @song2, @song3]
 
     @room1 = Room.new("Colin's Karaoke", @songs, 4, 5)
+
+    @drink1 = Drink.new("Beer", 4)
+    @drink2 = Drink.new("Cider", 3)
+
+    @drinks = [@drink1, @drink2]
+
+    @bar = Bar.new("Main Bar", @drinks)
   end
 
   def test_room_has_name()
@@ -99,6 +108,12 @@ class TestRoom < MiniTest::Test
     @room1.add_guest(@guest1)
     @room1.add_guest(@guest2)
     assert_equal(1010, @room1.till_balance())
+  end
+
+  def test_guest_buys_drink()
+    @room1.guest_buy_drink(@guest1, @drink1)
+    assert_equal(1004, @room1.till_balance())
+    assert_equal(46, @guest1.money())
   end
 
 end

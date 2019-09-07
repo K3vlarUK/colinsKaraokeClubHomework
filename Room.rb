@@ -54,4 +54,9 @@ class Room
     @till_balance += @entry_fee
   end
 
+  def guest_buy_drink(guest, drink)
+    guest.remove_money(drink.price())
+    @till_balance += drink.price()
+  end
+
 end
